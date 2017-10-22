@@ -1,0 +1,37 @@
+.App {
+  width: 300px;
+}
+
+.item {
+  display: inline-block;
+  margin-right: 10px;
+}
+.item-active {
+  border: 3px dashed #666;
+  background: none;
+}
+.item-active * {
+  display: none;
+}
+.item-active,
+.item-box {
+  width: 300px;
+  height: 100px;
+  margin-top: 5px;
+  overflow: hidden;
+}
+.item-box {
+  background-color: #990000;
+  border: 3px solid #444;
+  border-radius: 3px;
+}
+.number {
+  background-color: grey;
+  width: 30px;
+  height: 100%;
+  float: left;
+  cursor: move;
+  color: white;
+  font-size: 60px;
+  padding: 5px;
+}
