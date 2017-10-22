@@ -14,9 +14,9 @@ class Tags extends Component {
     _getTags() {
         const { tags } = this.props;
 
-        return tags.map((tag) => {
+        return tags.map((tag, idx) => {
             return (
-                <a>
+                <a key={ idx }>
                     <li className="option-result btn">{ tag }</li>
                 </a>
             );

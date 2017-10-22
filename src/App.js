@@ -8,16 +8,7 @@ import itemData from "./items/data";
 import ItemList from "./items/item-list";
 
 class App extends Component {
-    constructor() {
-        super();
-    }
-
     render() {
-        // const item = {
-        //     no: 1,
-        //     type: "진행중",
-        //     title: "aaa"
-        // };
         return (
             <div id="app">
                 <div className="container">

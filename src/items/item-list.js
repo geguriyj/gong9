@@ -17,7 +17,7 @@ class ItemList extends Component {
 
         return items.map((item) => {
             return (
-                <div className="poll">
+                <div className="poll" key={ item.no }>
                     <div className="poll-left">
                         <div className="poll-index">
                             #{item.no}
