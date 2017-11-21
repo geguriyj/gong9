@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Tags from "./tags";
 import StartTime from "./start-time";
-import ItemDetail from './item-detail';
 
 class ItemList extends Component {
     constructor() {
         super();
-
-        this._onMouseDown = this._onMouseDown.bind(this);
     }
     render() {
         const itemList = this._getList();
@@ -46,11 +43,9 @@ class ItemList extends Component {
                     </div>
                     <div className="poll-right">
                         {/*<div className="poll-votes-label">참여자:</div>*/}
-                        <Router>
                         <Link to={`/detail/${item.id}`} className="poll-votes-value">
                             공구
                         </Link>
-                        </Router>
                     </div>
                 </div>
             );
