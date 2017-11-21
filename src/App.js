@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-// import './App.css';
 import "./css/bootstrap-social.css";
 import "./css/main.css";
 
 import itemData from "./items/data";
-
 import ItemList from "./items/item-list";
 
 class App extends Component {

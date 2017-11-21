@@ -3,6 +3,11 @@ import Tags from "./tags";
 import StartTime from "./start-time";
 
 class ItemList extends Component {
+    constructor() {
+        super();
+
+        this._itemClick = this._itemClick.bind(this);
+    }
     render() {
         const itemList = this._getList();
         return (
@@ -15,12 +20,12 @@ class ItemList extends Component {
     _getList() {
         const { items } = this.props;
 
-        return items.map((item) => {
+        return items.map((item, idx) => {
             return (
-                <div className="poll" key={ item.no }>
+                <div className="poll" key={ item.id } onClick={ this._itemClick }>
                     <div className="poll-left">
                         <div className="poll-index">
-                            #{item.no}
+                            #{idx+1}
                         </div>
                         <div>
                             <div>
@@ -38,6 +43,13 @@ class ItemList extends Component {
                 </div>
             );
         });
+    }
+
+    _itemClick(event) {
+        const target = event.target;
+        const key = target.getAttribute("key");
+
+        alert(key);
     }
 }
 
