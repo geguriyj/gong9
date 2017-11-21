@@ -150,6 +150,7 @@ body {
   font-weight: 300;
   color: #1ec7c7;
   margin-top: -8px;
+  text-decoration: none;
 }
 
 .poll-answer {
@@ -216,5 +217,5 @@ body {
 }
 
 .voted {
-  /*background-color: #DEDEDE;*/
+  background-color: #DEDEDE;
 }

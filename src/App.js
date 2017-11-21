@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import "./css/bootstrap-social.css";
-import "./css/main.css";
+import { Link } from 'react-router'
 
-import itemData from "./items/data";
-import ItemList from "./items/item-list";
+import itemData from "./data/data";
+import ItemList from "./components/item-list";
 
 class App extends Component {
     render() {
@@ -11,12 +10,10 @@ class App extends Component {
             <div id="app">
                 <div className="container">
                     <div className="row">
-                        <div className="content col-lg-6 col-lg-offset-3">
-                            <div className="main">
-                                <div>
-                                    <div className="row order-selector"></div>
-                                    <ItemList items={ itemData } />
-                                </div>
+                        <div className="row order-selector"></div>
+                        <div className="poll-list">
+                            <div className="content col-lg-6 col-lg-offset-3">
+                                <ItemList items={ itemData } />
                             </div>
                         </div>
                     </div>

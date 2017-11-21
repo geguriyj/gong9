@@ -1,20 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, browserHistory } from 'react-router';
+
+import { Router, Route, hashHistory, browserHistory, IndexRoute } from 'react-router';
+import { BrowserRouter } from 'react-router-dom'
+
 import './index.css';
 import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import About from './components/about';
+import ItemDetail from './components/item-detail';
 
-import About from './components/About';
-import NoMatch from './components/NoMatch';
+import "./css/bootstrap-social.css";
+import "./css/main.css";
+// import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render((
+ReactDOM.render(
     <Router history={browserHistory}>
-        <Route path="/" component={App}>
-            {/*<IndexRoute component={Index} />*/}
-            <Route path="about" component={About}/>
-            <Route path="*" component={NoMatch}/>
-        </Route>
+        <div>
+            <Route exact path="/" component={App} />
+            <Route path="/detail/:id" component={ItemDetail} />
+            <Route path="/about" component={About} />
+        </div>
     </Router>
-), document.getElementById('root'));
-registerServiceWorker();
+, document.getElementById('root'));
+// registerServiceWorker();
