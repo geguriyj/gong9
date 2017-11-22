@@ -6,12 +6,8 @@ import ItemList from "./components/item-list";
 class App extends Component {
     render() {
         return (
-            <div id="app">
-                <div className="poll-list">
-                    <div className="content col-lg-6 col-lg-offset-3">
-                        <ItemList items={ itemData } />
-                    </div>
-                </div>
+            <div className="poll-list">
+                <ItemList items={ itemData } />
             </div>
         );
     }

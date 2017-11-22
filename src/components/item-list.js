@@ -10,10 +10,8 @@ class ItemList extends Component {
     render() {
         const itemList = this._getList();
         return (
-            <div className="main">
-                <div>
-                    {itemList}
-                </div>
+            <div>
+                {itemList}
             </div>
         );
     }
@@ -38,23 +36,21 @@ class ItemList extends Component {
                                     <Tags tags={ item.tags } />
                                 </div>
                             </div>
-                            <StartTime start={ item.start } />
+                            <StartTime item={ item } />
                         </div>
                     </div>
                     <div className="poll-right">
                         {/*<div className="poll-votes-label">참여자:</div>*/}
-                        <Link to={`/detail/${item.id}`} className="poll-votes-value">
-                            공구
+                        <Link to={`/detail/${item.id}`} className="">
+                            <span type="button"
+                                  data-toggle="button"
+                                  className="btn btn-outline-danger"
+                                  style={{ width: "80px", margin: "2px", fontSize: "1.2em"}}>공구</span>
                         </Link>
                     </div>
                 </div>
             );
         });
-    }
-
-    _onMouseDown(event) {
-        const target = event.target;
-        const id = target.getAttribute("id");
     }
 }
 

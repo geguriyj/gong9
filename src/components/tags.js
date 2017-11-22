@@ -17,7 +17,7 @@ class Tags extends Component {
         return tags.map((tag, idx) => {
             return (
                 <a key={ idx }>
-                    <li className="option-result btn">{ tag }</li>
+                    <li className="option-result btn" style={{borderRadius: 0, padding: 0}}>{ tag }</li>
                 </a>
             );
         });

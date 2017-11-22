@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 
 class StartTime extends Component {
     render() {
-        const { start } = this.props;
+        const { limit, color } = this.props.item;
 
         return (
-            <span className="poll-info">{ start }</span>
+            <span className="poll-info" style={{ color: color }}>종료: { limit }</span>
         );
     }
 }
