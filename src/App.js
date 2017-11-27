@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom'
 
 import firebase from "firebase";
 import _ from "lodash";
+import shortid from "shortid";
 
 import About from './components/about';
 import ItemDetail from './components/item-detail';
@@ -23,6 +24,9 @@ class App extends Component {
         };
 
         firebase.initializeApp(config);
+
+        this.saveItem = this.saveItem.bind(this);
+        this.addFavoriteItem = this.addFavoriteItem.bind(this);
 
         this.state = {
             items: []
@@ -70,8 +74,38 @@ class App extends Component {
         }
 
         return (
-            <ItemDetail item={ item } />
+            <ItemDetail item={ item }
+                        onSave={ this.saveItem }
+                        onFavorite={ this.addFavoriteItem } />
         );
+    }
+
+    saveItem(item) {
+        const newKey = shortid.generate();
+        const userId = "park";
+
+        const updates = {
+            id: newKey,
+            item_id: item.id,
+            type: item.type
+        };
+        const path = `users/${userId}/purchase/`;
+
+        return firebase.database().ref(path).set(updates);
+    }
+
+    addFavoriteItem(item) {
+        const newKey = shortid.generate();
+        const userId = "park";
+
+        const updates = {
+            id: newKey,
+            item_id: item.id,
+            type: item.type
+        };
+        const path = `users/${userId}/favorite/`;
+
+        return firebase.database().ref(path).set(updates);
     }
 
     // updateItem(data) {
@@ -83,12 +117,14 @@ class App extends Component {
     //     return firebase.database().ref().update(updates);
     // }
 
-    // addItem() {
+    // addItem(item) {
     //     const updates = {};
     //     updates["/items/"] = itemData;
     //
     //     return firebase.database().ref().push(updates);
     // }
+
+
 }
 
 export default App;

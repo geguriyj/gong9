@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
-import { Route } from 'react-router';
 import _ from "lodash";
 
 import Tags from "./tags";
@@ -57,11 +56,6 @@ class ItemList extends Component {
                 </div>
             );
         });
-    }
-
-    _clickDefail(items) {
-        // const id = match.params.id;
-        // return _.find(items, {id: id});
     }
 }
 
