@@ -9,6 +9,7 @@ import shortid from "shortid";
 import About from './components/about';
 import ItemDetail from './components/item-detail';
 import ItemList from "./components/item-list";
+import AddItem from "./components/add-item";
 
 class App extends Component {
     constructor() {
@@ -25,6 +26,7 @@ class App extends Component {
 
         firebase.initializeApp(config);
 
+        this.addItem = this.addItem.bind(this);
         this.saveItem = this.saveItem.bind(this);
         this.addFavoriteItem = this.addFavoriteItem.bind(this);
 
@@ -52,8 +54,10 @@ class App extends Component {
 
                             <Route exact path="/" render={() => <ItemList items={ items } />} />
                             <Route path="/list" render={() => <ItemList items={ items } />} />
-                            <Route path="/detail/:id" render={(router) => this.renderDefail(router) } />
+                            <Route path="/detail/:id" render={(router) => this.renderDetail(router) } />
                             <Route path="/about" component={ About } />
+                            <Route path="/add" render={(router) => this.renderAddItem(router) } />
+
                         </div>
                     </div>
                 </div>
@@ -61,7 +65,13 @@ class App extends Component {
         );
     }
 
-    renderDefail(router) {
+    renderAddItem() {
+        return (
+            <AddItem onAddItem={ this.addItem } />
+        );
+    }
+
+    renderDetail(router) {
         if (!router) {
             return null;
         }
@@ -75,9 +85,16 @@ class App extends Component {
 
         return (
             <ItemDetail item={ item }
-                        onSave={ this.saveItem }
-                        onFavorite={ this.addFavoriteItem } />
+                onSave={ this.saveItem }
+                onFavorite={ this.addFavoriteItem } />
         );
+    }
+
+    addItem(itemData) {
+        const updates = {};
+        updates["/items/"] = itemData;
+
+        return firebase.database().ref().push(updates);
     }
 
     saveItem(item) {
@@ -116,14 +133,6 @@ class App extends Component {
     //
     //     return firebase.database().ref().update(updates);
     // }
-
-    // addItem(item) {
-    //     const updates = {};
-    //     updates["/items/"] = itemData;
-    //
-    //     return firebase.database().ref().push(updates);
-    // }
-
 
 }
 

@@ -4,14 +4,17 @@ import _ from "lodash";
 
 import Tags from "./tags";
 import StartTime from "./start-time";
+import AddItemButton from "./add-item-button";
 
 class ItemList extends Component {
     render() {
         const itemList = this._getList();
+        const renderAddItemButton = this._renderAddItemButton();
 
         return (
             <div className="poll-list">
                 {itemList}
+                {renderAddItemButton}
             </div>
         );
     }
@@ -56,6 +59,12 @@ class ItemList extends Component {
                 </div>
             );
         });
+    }
+
+    _renderAddItemButton() {
+        return (
+            <AddItemButton  />
+        );
     }
 }
 
