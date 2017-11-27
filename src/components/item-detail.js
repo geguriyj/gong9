@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import firebase from "firebase";
 import _ from "lodash";
-import itemData from "../data/data";
+// import itemData from "../data/data";
 // import { Button } from 'react-bootstrap';
 
 export default class extends Component {
@@ -15,8 +16,13 @@ export default class extends Component {
     }
 
     _getContent() {
-        const { id } = this.props.match.params;
-        const item = _.find(itemData, {id: id});
+        const { item } = this.props.item;
+
+        debugger;
+
+        if (!item) {
+            return null;
+        }
 
         return (
             <div key={ item.id } id={ item.id } className="mb-3">
@@ -31,7 +37,7 @@ export default class extends Component {
                 </div>
                 <div style={{ borderBottom: "2px solid #7AF5F5"}}></div>
                 <div className="poll" style={{ textAlign: "center"}}>
-                    <img width="300" height="300" src={ item.img }/>
+                    <img width="100%" height="300" src={ item.img }/>
                 </div>
                 <div className="row align-items-end">
                     <div className="col" style={{ textAlign: "center"}}>

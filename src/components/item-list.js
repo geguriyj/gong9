@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
+import { Route } from 'react-router';
 import _ from "lodash";
 
+import ItemDetail from './item-detail';
 import Tags from "./tags";
 import StartTime from "./start-time";
 
@@ -10,7 +12,7 @@ class ItemList extends Component {
         const itemList = this._getList();
 
         return (
-            <div>
+            <div className="poll-list">
                 {itemList}
             </div>
         );
@@ -46,16 +48,21 @@ class ItemList extends Component {
                     </div>
                     <div className="poll-right">
                         {/*<div className="poll-votes-label">참여자:</div>*/}
-                        <Link to={`/detail/${item.id}`} className="">
-                        <span type="button"
-                              data-toggle="button"
-                              className="btn btn-outline-danger"
-                              style={{ width: "80px", margin: "2px", fontSize: "1.2em"}}>공구</span>
-                        </Link>
+                            <Link to={`/detail/${item.id}`}>
+                                <span type="button"
+                                      data-toggle="button"
+                                      className="btn btn-outline-danger"
+                                      style={{ width: "80px", margin: "2px", fontSize: "1.2em"}}>공구</span>
+                            </Link>
                     </div>
                 </div>
             );
         });
+    }
+
+    _clickDefail(items) {
+        // const id = match.params.id;
+        // return _.find(items, {id: id});
     }
 }
 

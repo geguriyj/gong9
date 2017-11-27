@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
-import firebase from "firebase";
+import { Route } from 'react-router';
+import { BrowserRouter } from 'react-router-dom'
 
-import itemData from "./data/data";
+import firebase from "firebase";
+import _ from "lodash";
+
+// import itemData from "./com/data";
+// import FireBase from "./components/firebase";
+
+import About from './components/about';
+import ItemDetail from './components/item-detail';
 import ItemList from "./components/item-list";
 
 class App extends Component {
@@ -16,6 +24,7 @@ class App extends Component {
             storageBucket: "gong9-41d7d.appspot.com",
             messagingSenderId: "815953697268"
         };
+
         firebase.initializeApp(config);
 
         this.state = {
@@ -31,30 +40,58 @@ class App extends Component {
     }
 
     render() {
-        const itemList = this.state.items;
+        const items = this.state.items;
 
         return (
-            <div className="poll-list">
-                <ItemList items={ itemList } />
-            </div>
+            <BrowserRouter>
+                <div className="container">
+                    <div className="content col-lg-6 col-lg-offset-3">
+                        <div className="main">
+                            <div className="row order-selector"></div>
+
+                            <Route exact path="/" render={() => <ItemList items={ items } />} />
+                            <Route path="/list" render={() => <ItemList items={ items } />} />
+                            <Route path="/detail/:id" render={(router) => this.renderDefail(router) } />
+                            <Route path="/about" component={ About } />
+                        </div>
+                    </div>
+                </div>
+            </BrowserRouter>
         );
     }
 
-    updateItem(data) {
-        const keys = _.keyBy(data, "id");
-        const idx = _.indexOf(keys, data.id);
-        const updates = {};
-        updates[`/items/`][idx] = data;
+    renderDefail(router) {
+        if (!router) {
+            return null;
+        }
+        const id = router.match.params.id;
+        const items = this.state.items;
+        const item = _.find(items, {id: id});
 
-        return firebase.database().ref().update(updates);
+        if (!item) {
+            return null;
+        }
+
+        return (
+            <ItemDetail item={ item } />
+        );
     }
 
-    addItem() {
-        const updates = {};
-        updates["/items/"] = itemData;
+    // updateItem(data) {
+    //     const keys = _.keyBy(data, "id");
+    //     const idx = _.indexOf(keys, data.id);
+    //     const updates = {};
+    //     updates[`/items/`][idx] = data;
+    //
+    //     return firebase.database().ref().update(updates);
+    // }
 
-        return firebase.database().ref().push(updates);
-    }
+    // addItem() {
+    //     const updates = {};
+    //     updates["/items/"] = itemData;
+    //
+    //     return firebase.database().ref().push(updates);
+    // }
 }
 
 export default App;
