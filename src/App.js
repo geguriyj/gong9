@@ -5,9 +5,6 @@ import { BrowserRouter } from 'react-router-dom'
 import firebase from "firebase";
 import _ from "lodash";
 
-// import itemData from "./com/data";
-// import FireBase from "./components/firebase";
-
 import About from './components/about';
 import ItemDetail from './components/item-detail';
 import ItemList from "./components/item-list";
