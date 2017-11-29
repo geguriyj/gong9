@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import firebase from "firebase";
-import _ from "lodash";
-// import itemData from "../data/data";
-// import { Button } from 'react-bootstrap';
 
 export default class extends Component {
+    constructor() {
+        super();
+
+        this.clickSave = this.clickSave.bind(this);
+        this.clickFavorite = this.clickFavorite.bind(this);
+    }
     render() {
         const itemContent = this._getContent();
 
@@ -16,9 +18,7 @@ export default class extends Component {
     }
 
     _getContent() {
-        const { item } = this.props.item;
-
-        debugger;
+        const { item } = this.props;
 
         if (!item) {
             return null;
@@ -36,17 +36,34 @@ export default class extends Component {
                     </div>
                 </div>
                 <div style={{ borderBottom: "2px solid #7AF5F5"}}></div>
-                <div className="poll" style={{ textAlign: "center"}}>
-                    <img width="100%" height="300" src={ item.img }/>
+                <div className="poll" style={{ textAlign: "center", padding: 0}}>
+                    <img src={ item.img } alt="" style={{ width: "100%", height: "100%"}}/>
                 </div>
                 <div className="row align-items-end">
                     <div className="col" style={{ textAlign: "center"}}>
-                        <span type="button" data-toggle="button" className="btn btn-outline-danger" style={{ width: "90px", margin: "2px", fontSize: "1.2em"}}>공구</span>
-                        <span type="button" data-toggle="button" className="btn btn-outline-success" style={{ width: "90px", margin: "2px", fontSize: "1.2em"}}>초대</span>
-                        <span type="button" data-toggle="button" className="btn btn-outline-info" style={{ width: "90px", margin: "2px", fontSize: "1.2em"}}>찜</span>
+                        <span type="button" data-toggle="button" className="btn btn-outline-danger"
+                              style={{ width: "90px", margin: "2px", fontSize: "1.2em"}}
+                              onClick={ this.clickSave }>공구</span>
+                        <span type="button" data-toggle="button" className="btn btn-outline-success"
+                              style={{ width: "90px", margin: "2px", fontSize: "1.2em"}}>초대</span>
+                        <span type="button" data-toggle="button" className="btn btn-outline-info"
+                              style={{ width: "90px", margin: "2px", fontSize: "1.2em"}}
+                              onClick={ this.clickFavorite }>찜</span>
                     </div>
                 </div>
             </div>
         );
+    }
+
+    clickSave() {
+        const { onSave, item } = this.props;
+
+        onSave(item);
+    }
+
+    clickFavorite() {
+        const { onFavorite, item } = this.props;
+
+        onFavorite(item);
     }
 }

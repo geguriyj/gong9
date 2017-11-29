@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
-import { Route } from 'react-router';
 import _ from "lodash";
 
-import ItemDetail from './item-detail';
 import Tags from "./tags";
 import StartTime from "./start-time";
+import AddItemButton from "./add-item-button";
 
 class ItemList extends Component {
     render() {
         const itemList = this._getList();
+        const renderAddItemButton = this._renderAddItemButton();
 
         return (
             <div className="poll-list">
                 {itemList}
+                {renderAddItemButton}
             </div>
         );
     }
@@ -23,7 +24,7 @@ class ItemList extends Component {
 
         if (_.isEmpty(items)) {
             return (
-                <div className="poll">현재 진행중인 공구가 없습니다.</div>
+                <div className="poll" style={{ textAlign: "center" }}>준비중입니다.</div>
             );
         }
         return items.map((item, idx) => {
@@ -60,9 +61,10 @@ class ItemList extends Component {
         });
     }
 
-    _clickDefail(items) {
-        // const id = match.params.id;
-        // return _.find(items, {id: id});
+    _renderAddItemButton() {
+        return (
+            <AddItemButton  />
+        );
     }
 }
 
