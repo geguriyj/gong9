@@ -4,17 +4,23 @@ import _ from "lodash";
 
 import Tags from "./tags";
 import StartTime from "./start-time";
-import AddItemButton from "./add-item-button";
+import TaskButton from "./task-button";
 
 class ItemList extends Component {
+    constructor() {
+        super();
+
+        this.clickDelete = this.clickDelete.bind(this);
+    }
+
     render() {
         const itemList = this._getList();
-        const renderAddItemButton = this._renderAddItemButton();
+        const renderTaskButton = this._renderTaskButton();
 
         return (
             <div className="poll-list">
-                {itemList}
-                {renderAddItemButton}
+                { itemList }
+                { renderTaskButton }
             </div>
         );
     }
@@ -27,17 +33,27 @@ class ItemList extends Component {
                 <div className="poll" style={{ textAlign: "center" }}>준비중입니다.</div>
             );
         }
-        return items.map((item, idx) => {
-            return (
-                <div className="poll" key={ item.id } id={ item.id }>
+
+        let itemList = [];
+        let count = 0;
+
+        _.forEach(items, (item, key) => {
+
+            count++;
+
+            const title = item.title || "공구할래.유?";
+            const type = item.type || "진행중";
+
+            itemList.push(
+                <div className="poll" key={ key }>
                     <div className="poll-left">
                         <div className="poll-index">
-                            #{idx+1}
+                            #{count}
                         </div>
                         <div>
                             <div>
-                                <span className="poll-info">[{item.type}] </span>
-                                <span className="question">{item.title}</span>
+                                <span className="poll-info">[{type}] </span>
+                                <span className="question">{title}</span>
                             </div>
                             <div className="poll-answer">
                                 <div className="answer-options">
@@ -55,16 +71,39 @@ class ItemList extends Component {
                                       className="btn btn-outline-danger"
                                       style={{ width: "80px", margin: "2px", fontSize: "1.2em"}}>공구</span>
                             </Link>
+                            <span type="button"
+                                  data-toggle="button"
+                                  className="btn btn-outline-danger"
+                                  style={{ width: "80px", margin: "2px", fontSize: "1.2em"}}
+                                  data-key={ key }
+                                  onClick={ this.clickDelete }>삭제</span>
                     </div>
                 </div>
             );
         });
+
+        return itemList;
     }
 
-    _renderAddItemButton() {
+    _renderTaskButton() {
+        const { isLogin } = this.props;
+
         return (
-            <AddItemButton  />
+            <TaskButton isLogin={ isLogin } />
         );
+    }
+
+    clickDelete(e) {
+        const { onDelete } = this.props;
+
+        const target = e.target;
+        const key = target.getAttribute("data-key");
+
+        if (!key) {
+            return;
+        }
+
+        onDelete(key);
     }
 }
 

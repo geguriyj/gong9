@@ -1,21 +1,23 @@
 const itemData = [{
     id: "item-1",
     type: "진행중",
-    title: "미리겨울준비 스타킹 1+1+1",
-    tags: ["여성스타킹","3묶음","무료배송"],
+    title: "[1+1] 더무지 오버핏 기모 맨투맨",
+    tags: ["오버핏","기모 맨투맨","무료배송"],
     start: "1 hour ago",
     limit: "3일 전",
     color: "#20c997",
-    img: "http://img.wemep.co.kr/deal/5/585/2315855/76d29834a2c66594ddd1e1545e9bb42b7d719b3b.jpg"
+    link: "http://storefarm.naver.com/standardco/products/2223143239?NaPm=ct%3Djal4rdug%7Cci%3Da9108bcf00652aed9a0cba5326bc051a420e28b1%7Ctr%3Dslsl%7Csn%3D412880%7Cic%3D%7Chk%3D0269f602348ab17e604a9f3fa2887588c2828a7a",
+    img: "http://shop1.phinf.naver.net/20171026_227/standardco_1509000456584KGAP3_JPEG/32307616204383114_1766822977.jpg?type=m450"
 },{
     id: "item-2",
     type: "오늘",
-    title: "양털깔창/키높이깔창 완벽FIT!",
-    tags: ["인기깔창","모든 남녀들의 비밀"],
+    title: "[슈퍼특가] 기모레깅스1+1",
+    tags: ["3900원","모든 남녀들의 비밀"],
     start: "10 hours ago",
     limit: "3시간 전",
     color: "#dc3545",
-    img: "http://img.wemep.co.kr/deal/5/131/2951315/c682c76887c74572c338f75c012a9ad4ffca38bc.jpg"
+    link: "http://www.ticketmonster.co.kr/deal/763119714?NaPm=ct%3Djal4tyfs%7Cci%3D2954ce5feeb360647055f38cd9e117b19ba86f9b%7Ctr%3Dslsl%7Csn%3D221844%7Chk%3D12800dc9a7cc2d04bc61cb534b0a71f9662d5333&utm_source=naver&utm_medium=affiliate&utm_term=&utm_content=&utm_campaign=%EB%84%A4%EC%9D%B4%EB%B2%84%EC%A7%80%EC%8B%9D%EC%87%BC%ED%95%91_%ED%86%B5%ED%95%A9%EA%B2%80%EC%83%89%ED%95%AB%EB%94%9C",
+    img: "http://img2.tmon.kr/deals/2017/11/22/763119714/763119714_front_081958d764_2690d.jpg"
 },{
     id: "item-3",
     type: "종료임박",

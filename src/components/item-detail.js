@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 
-export default class extends Component {
+class ItemDetail extends Component {
     constructor() {
         super();
 
@@ -12,7 +13,7 @@ export default class extends Component {
 
         return (
             <div>
-                {itemContent}
+                { itemContent }
             </div>
         );
     }
@@ -49,6 +50,11 @@ export default class extends Component {
                         <span type="button" data-toggle="button" className="btn btn-outline-info"
                               style={{ width: "90px", margin: "2px", fontSize: "1.2em"}}
                               onClick={ this.clickFavorite }>찜</span>
+                        <Link to="/">
+                            <span type="button" data-toggle="button" className="btn btn-outline-info"
+                                  style={{ width: "90px", margin: "2px", fontSize: "1.2em"}}
+                                  onClick={ this.clickFavorite }>목록으로</span>
+                        </Link>
                     </div>
                 </div>
             </div>
@@ -67,3 +73,5 @@ export default class extends Component {
         onFavorite(item);
     }
 }
+
+export default ItemDetail;

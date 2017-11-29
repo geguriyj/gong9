@@ -14,6 +14,10 @@ class Tags extends Component {
     _getTags() {
         const { tags } = this.props;
 
+        if (!tags || tags.length === 0) {
+            return null;
+        }
+
         return tags.map((tag, idx) => {
             return (
                 <a key={ idx }>
