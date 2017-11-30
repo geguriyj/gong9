@@ -18,7 +18,9 @@ class Tags extends Component {
             return null;
         }
 
-        return tags.map((tag, idx) => {
+        const tagList = tags.split("|");
+
+        return tagList.map((tag, idx) => {
             return (
                 <a key={ idx }>
                     <li className="option-result btn" style={{borderRadius: 0, padding: 0}}>{ tag }</li>
