@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import _ from "lodash";
+import firebase from "firebase";
 
 import Tags from "./tags";
 import StartTime from "./start-time";
@@ -10,7 +11,45 @@ class MyList extends Component {
     constructor() {
         super();
 
+        this.state = {
+            items: [],
+            user: {
+                email: null,
+                uid: null,
+                purchase: [],
+                favorite: []
+            }
+        };
+
         this.clickDelete = this.clickDelete.bind(this);
+    }
+
+    componentDidMount() {
+        this.myPurchaseList();
+    }
+
+    myPurchaseList() {
+        const { items, user } = this.props;
+
+        const path = `users/${user.uid}/purchase`;
+
+        const database = firebase.database();
+        database.ref(path).once("value").then((snapshot) => {
+
+            const purchase = snapshot.val();
+
+            let myList = [];
+
+            _.forEach(purchase, (val1) => {
+                _.forEach(items, (val2) => {
+                    if (val1.item_id === val2.id) {
+                        myList.push(val2);
+                    }
+                });
+            });
+
+            this.setState({user: {purchase: myList} });
+        });
     }
 
     render() {
@@ -26,13 +65,15 @@ class MyList extends Component {
     }
 
     _getList() {
-        const { items } = this.props;
+        const { purchase } = this.state.user;
 
-        if (_.isEmpty(items)) {
+        if (_.isEmpty(purchase)) {
             return (
                 <div className="poll" style={{ textAlign: "center" }}>참여중인 공구가 없습니다.</div>
             );
         }
+
+        const items = purchase;
 
         let itemList = [];
         let count = 0;
@@ -66,19 +107,11 @@ class MyList extends Component {
                         </div>
                     </div>
                     <div className="poll-right">
-                        {/*<div className="poll-votes-label">참여자:</div>*/}
-                            <Link to={`/detail/${item.id}`}>
-                                <span type="button"
-                                      data-toggle="button"
-                                      className="btn btn-outline-danger"
-                                      style={{ width: "80px", margin: "2px", fontSize: "1.2em"}}>공구</span>
-                            </Link>
-                            <span type="button"
-                                  data-toggle="button"
-                                  className="btn btn-outline-danger"
-                                  style={{ width: "80px", margin: "2px", fontSize: "1.2em"}}
-                                  data-key={ key }
-                                  onClick={ this.clickDelete }>삭제</span>
+                        <span type="button"
+                              data-toggle="button"
+                              className="btn btn-outline-danger list-btn"
+                              data-key={ key }
+                              onClick={ this.clickDelete }>삭제</span>
                     </div>
                 </div>
             );

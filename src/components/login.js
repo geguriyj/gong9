@@ -20,33 +20,28 @@ class MemberLogin extends Component {
 
     _getContent() {
         return (
-            <div className="mb-3">
-                <div className="poll col-lg-6 col-lg-offset-3">
-                    <div className="poll-left">
-                        <div className="question">로그인</div>
+            <div>
+                <div>
+                    <div className="poll">
+                        <div className="poll-left">
+                            <div className="question">로그인</div>
+                        </div>
+                    </div>
+                    <div className="bar-line"></div>
+                    <div className="poll" style={{ padding: "10px 10px 10px 20px" }}>
+                        <span>*아이디: </span><input id="txt_id" type="text" className="input-field"/>
+                    </div>
+                    <div className="poll" style={{ padding: "10px 10px 10px 20px" }}>
+                        <span>*비밀번호(6자리): </span><input id="txt_pw" type="text" className="input-field"/>
                     </div>
                 </div>
-                <div style={{ borderBottom: "2px solid #7AF5F5"}}></div>
-                <div className="poll" style={{ textAlign: "center", padding: "5px"}}>
-                    *아이디: <input id="txt_id" type="text" />
-                </div>
-                <div className="poll" style={{ textAlign: "center", padding: "5px"}}>
-                    *비밀번호(6자리): <input id="txt_pw" type="text" />
-                </div>
-                <div className="poll" style={{ textAlign: "center", padding: "5px"}}>
-
-                </div>
-                <div className="row align-items-end">
-                    <div className="col" style={{ textAlign: "center"}}>
-                        <div style={{ position: "fixed", bottom: 0, width: "93%" }}>
-                            <div style={{ padding: "5px 0 5px 0" }}>
-                                <span type="button" data-toggle="button" className="btn btn-outline-success lg-btn"
-                                    onClick={ this.clickMemberLogin }>로그인</span>
-                                <Link to={`/`}>
-                                    <span type="button" data-toggle="button" className="btn btn-outline-success lg-btn">취소</span>
-                                </Link>
-                            </div>
-                        </div>
+                <div className="task-menu">
+                    <div className="btn-group" role="group">
+                        <span type="button" data-toggle="button" className="btn btn-outline-success lg-btn"
+                    onClick={ this.clickMemberLogin }>로그인</span>
+                        <Link to={`/`}>
+                            <span type="button" data-toggle="button" className="btn btn-outline-danger lg-btn">취소</span>
+                        </Link>
                     </div>
                 </div>
             </div>

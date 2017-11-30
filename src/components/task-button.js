@@ -6,10 +6,8 @@ export default class extends Component {
         const renderButton = this._renderButton();
 
         return (
-            <div style={{ position: "fixed", bottom: 0, width: "93%" }}>
-                <div style={{ padding: "5px 0 5px 0" }}>
-                    { renderButton }
-                </div>
+            <div className="task-menu">
+                { renderButton }
             </div>
         );
     }
@@ -22,10 +20,10 @@ export default class extends Component {
         //로그인 사용자
         if (isLogin) {
             return (
-                <div>
+                <div className="btn-group" role="group">
                     <Link to={`/add`}>
                         <span type="button" data-toggle="button"
-                              className="btn btn-outline-danger lg-btn">공구등록</span>
+                              className="btn btn-outline-success lg-btn">공구등록</span>
                     </Link>
                     { renderMyPageButton }
                 </div>
@@ -45,7 +43,7 @@ export default class extends Component {
             return (
                 <Link to={`/`}>
                     <span type="button" data-toggle="button"
-                          className="btn btn-outline-success lg-btn">목록으로</span>
+                          className="btn btn-outline-warning lg-btn">목록으로</span>
                 </Link>
             );
         }
@@ -53,21 +51,21 @@ export default class extends Component {
         return (
             <Link to={`/my`}>
                 <span type="button" data-toggle="button"
-                      className="btn btn-outline-success lg-btn">내 공구</span>
+                      className="btn btn-outline-info lg-btn">내 공구</span>
             </Link>
         );
     }
 
     renderCheckInButton() {
         return (
-            <div>
+            <div className="btn-group" role="group">
                 <Link to={`/login`}>
                     <span type="button" data-toggle="button"
                           className="btn btn-outline-success lg-btn">로그인</span>
                 </Link>
                 <Link to={`/join`}>
                     <span type="button" data-toggle="button"
-                          className="btn btn-outline-success lg-btn">멤버할래.유</span>
+                          className="btn btn-outline-info lg-btn">멤버할래.유</span>
                 </Link>
             </div>
         );

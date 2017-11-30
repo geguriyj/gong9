@@ -29,6 +29,16 @@ class App extends Component {
 
         firebase.initializeApp(config);
 
+        this.state = {
+            items: [],
+            user: {
+                email: null,
+                uid: null,
+                purchase: [],
+                favorite: []
+            }
+        };
+
         this.memberJoin = this.memberJoin.bind(this);
         this.memberLogin = this.memberLogin.bind(this);
         this.login = this.login.bind(this);
@@ -37,23 +47,20 @@ class App extends Component {
         this.deleteItem = this.deleteItem.bind(this);
         this.saveItem = this.saveItem.bind(this);
         this.addFavoriteItem = this.addFavoriteItem.bind(this);
-
-        this.state = {
-            items: [],
-            loginEmail: null
-        };
     }
 
-    componentWillMount() {
+    componentDidMount() {
 
         this.reloadDataBase();
+        // this.myPurchaseList();
+        // this.myFavoriteList();
 
-        const userId = this.state.loginEmail;
+        const userId = this.state.user.email;
 
         if (!userId) {
             firebase.auth().onAuthStateChanged((user) => {
                 if (user) {
-                    this.setLoginId(user.email);
+                    this.setLoginId(user.email, user.uid);
                 }
             });
         }
@@ -65,8 +72,9 @@ class App extends Component {
         return (
             <Router>
                 <div className="container">
-                    <div className="content col-lg-6 col-lg-offset-3">
+                    <div className="content">
                         <div className="main">
+
                             { renderLoginInfo }
                             <div className="row order-selector"></div>
 
@@ -85,36 +93,65 @@ class App extends Component {
         );
     }
 
-    setLoginId(email) {
-        this.setState({loginEmail: email});
+    setLoginId(email, uid) {
+        this.setState({
+            user: {
+                email: email,
+                uid: uid
+            }
+        });
     }
 
     reloadDataBase() {
+        const path = `items`;
+
         const database = firebase.database();
-        database.ref("items").once("value").then((snapshot) => {
+        database.ref(path).once("value").then((snapshot) => {
             this.setState({items: snapshot.val()});
         });
     }
 
-    renderLoginInfo() {
-        const { loginEmail } = this.state;
+    myPurchaseList() {
+        const path = `users/${this.state.user.uid}/purchase`;
 
-        if (!loginEmail) {
+        const database = firebase.database();
+        database.ref(path).once("value").then((snapshot) => {
+            this.setState({user: { perchase: snapshot.val() }});
+        });
+    }
+
+    myFavoriteList() {
+        const path = `users/${this.state.user.uid}/favorite`;
+
+        const database = firebase.database();
+        database.ref(path).once("value").then((snapshot) => {
+            this.setState({user: { favorite: snapshot.val() }});
+        });
+    }
+
+    renderLoginInfo() {
+        const { user } = this.state;
+
+        if (!user.email) {
             return null;
         }
 
         return (
-            <div className="row">
-                <span>[{ loginEmail }] 님이 로그인 했습니다.</span>
-                <span type="button" style={{ marginLeft: "15px" }}
-                    onClick={ this.logout }>로그아웃</span>
+            <div className="login-info">
+                <span>{ user.email } 님 반갑습니다 :)</span>
+                <span type="button" data-toggle="button"
+                      className="btn btn-outline-warning log-out" onClick={ this.logout }>로그아웃</span>
             </div>
         );
     }
 
     renderItemList() {
-        const { items, loginEmail } = this.state;
-        const isLogin = loginEmail ? true :  false;
+        const { items, user } = this.state;
+        const isLogin = user.email ? true :  false;
+
+        if (_.isEmpty(items)) {
+            return null;
+        }
 
         return (
             <ItemList items={ items } isLogin={ isLogin } onDelete={ this.deleteItem } />
@@ -122,12 +159,17 @@ class App extends Component {
     }
 
     renderMyList(router) {
-        const { loginEmail } = this.state;
-        const isLogin = loginEmail ? true :  false;
+        const { items, user } = this.state;
+
+        if (!user.uid || _.isEmpty(items)) {
+            return null;
+        }
+
+        const isLogin = user.email ? true :  false;
         const pathName = router.location.pathname;
 
         return (
-            <MyList {...this.state} pathName={ pathName } isLogin={ isLogin } onDelete={ this.deleteItem } />
+            <MyList items={ items } user={ user } pathName={ pathName } isLogin={ isLogin } onDelete={ this.deleteItem } />
         );
     }
 
@@ -177,8 +219,9 @@ class App extends Component {
             link: itemData.link,
             img: itemData.img,
             type: "ING",
+            tags: itemData.tags,
             insert_time: new Date().getTime(),
-            insert_user: this.state.loginEmail
+            insert_user: this.state.user.email
         };
         const path = `items/${newKey}`;
 
@@ -211,28 +254,26 @@ class App extends Component {
 
     saveItem(item) {
         const newKey = shortid.generate();
-        const loginEmail = this.state.loginEmail;
 
         const updates = {
             id: newKey,
             item_id: item.id,
             type: item.type
         };
-        const path = `users/${loginEmail}/purchase/`;
+        const path = `users/${this.state.user.uid}/purchase/${newKey}`;
 
         return firebase.database().ref(path).set(updates);
     }
 
     addFavoriteItem(item) {
         const newKey = shortid.generate();
-        const loginEmail = this.state.loginEmail;
 
         const updates = {
             id: newKey,
             item_id: item.id,
             type: item.type
         };
-        const path = `users/${loginEmail}/favorite/`;
+        const path = `users/${this.state.user.uid}/favorite/${newKey}`;
 
         return firebase.database().ref(path).set(updates);
     }
@@ -272,20 +313,17 @@ class App extends Component {
     }
 
     _setSession(email, password, router) {
-        // const email = `${id}@naver.com`;
-        // const password = pw || "aa1234";
-
         return firebase.auth().signInWithEmailAndPassword(email, password)
             .then((res) => {
-                this._completeLogin(email, router);
+                this._completeLogin(res.email, res.uid, router);
             })
             .catch((error) => {
                 alert(error.message);
             });
     }
 
-    _completeLogin(email, router) {
-        this.setLoginId(email);
+    _completeLogin(email, uid, router) {
+        this.setLoginId(email, uid);
 
         if (router) {
             router.history.push("/");

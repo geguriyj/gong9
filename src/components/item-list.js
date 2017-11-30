@@ -18,8 +18,10 @@ class ItemList extends Component {
         const renderTaskButton = this._renderTaskButton();
 
         return (
-            <div className="poll-list">
-                { itemList }
+            <div>
+                <div className="poll-list">
+                    { itemList }
+                </div>
                 { renderTaskButton }
             </div>
         );
@@ -67,18 +69,16 @@ class ItemList extends Component {
                     </div>
                     <div className="poll-right">
                         {/*<div className="poll-votes-label">참여자:</div>*/}
-                            <Link to={`/detail/${item.id}`}>
-                                <span type="button"
-                                      data-toggle="button"
-                                      className="btn btn-outline-danger"
-                                      style={{ width: "80px", margin: "2px", fontSize: "1.2em"}}>공구</span>
-                            </Link>
+                        <Link to={`/detail/${item.id}`}>
                             <span type="button"
                                   data-toggle="button"
-                                  className="btn btn-outline-danger"
-                                  style={{ width: "80px", margin: "2px", fontSize: "1.2em"}}
-                                  data-key={ key }
-                                  onClick={ this.clickDelete }>삭제</span>
+                                  className="btn btn-outline-success list-btn">공구</span>
+                        </Link>
+                        <span type="button"
+                              data-toggle="button"
+                              className="btn btn-outline-danger list-btn"
+                              data-key={ key }
+                              onClick={ this.clickDelete }>삭제</span>
                     </div>
                 </div>
             );
