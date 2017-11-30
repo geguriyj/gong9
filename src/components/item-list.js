@@ -39,7 +39,7 @@ class ItemList extends Component {
         let itemList = [];
         let count = 0;
 
-        _.forEach(items, (item, key) => {
+        _.forEach(items, (item) => {
 
             count++;
 
@@ -72,7 +72,7 @@ class ItemList extends Component {
                         <Link to={`/detail/${item.id}`}>
                             <span type="button"
                                   data-toggle="button"
-                                  className="btn btn-outline-success list-btn">공구</span>
+                                  className="btn btn-outline-success list-btn">보기</span>
                         </Link>
                         <span type="button"
                               data-toggle="button"

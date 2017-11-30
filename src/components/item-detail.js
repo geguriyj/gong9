@@ -57,13 +57,23 @@ class ItemDetail extends Component {
     }
 
     clickSave() {
-        const { onSave, item, router } = this.props;
+        const { onSave, user, item, router } = this.props;
+
+        if (!user.uid) {
+            router.history.replace("/login");
+            return;
+        }
 
         onSave(item, router);
     }
 
     clickFavorite() {
-        const { onFavorite, item, router } = this.props;
+        const { onFavorite, user, item, router } = this.props;
+
+        if (!user.uid) {
+            router.history.replace("/login");
+            return;
+        }
 
         onFavorite(item, router);
     }

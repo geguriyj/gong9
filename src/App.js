@@ -204,7 +204,7 @@ class App extends Component {
         }
 
         return (
-            <ItemDetail item={ item } router={ router }
+            <ItemDetail user={ this.state.user } item={ item } router={ router }
                 onSave={ this.saveItem }
                 onFavorite={ this.addFavoriteItem } />
         );
@@ -281,7 +281,11 @@ class App extends Component {
         };
         const path = `users/${this.state.user.uid}/favorite/${item.id}`;
 
-        return firebase.database().ref(path).set(updates);
+        return firebase.database().ref(path)
+            .set(updates)
+            .then(() => {
+                alert("찜 했습니다.");
+            });
     }
 
     memberJoin(email, password, router) {

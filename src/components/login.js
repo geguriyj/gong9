@@ -39,8 +39,9 @@ class MemberLogin extends Component {
                     <div className="btn-group" role="group">
                         <span type="button" data-toggle="button" className="btn btn-outline-success lg-btn"
                     onClick={ this.clickMemberLogin }>로그인</span>
-                        <Link to={`/`}>
-                            <span type="button" data-toggle="button" className="btn btn-outline-danger lg-btn">취소</span>
+                        <Link to={`/join`}>
+                            <span type="button" data-toggle="button"
+                                  className="btn btn-outline-info lg-btn">가입할래.유</span>
                         </Link>
                     </div>
                 </div>
