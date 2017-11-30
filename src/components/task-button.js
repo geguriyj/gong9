@@ -17,20 +17,53 @@ export default class extends Component {
     _renderButton() {
         const { isLogin } = this.props;
 
+        const renderMyPageButton = this.renderMyPageButton();
+
+        //로그인 사용자
         if (isLogin) {
             return (
-                <Link to={`/add`}>
+                <div>
+                    <Link to={`/add`}>
+                        <span type="button" data-toggle="button" className="btn btn-outline-success"
+                              style={{ width: "50%", fontSize: "1.2em"}}>공구등록</span>
+                    </Link>
+                    { renderMyPageButton }
+                </div>
+            );
+        }
+
+        //비로그인 사용자
+        const renderCheckInButton = this.renderCheckInButton();
+
+        return renderCheckInButton;
+    }
+
+    renderMyPageButton() {
+        const { pathName } = this.props;
+
+        if (pathName && pathName.indexOf("my") > -1) {
+            return (
+                <Link to={`/`}>
                     <span type="button" data-toggle="button" className="btn btn-outline-success"
-                          style={{ width: "100%", fontSize: "1.2em"}}>공구등록</span>
+                          style={{ width: "50%", fontSize: "1.2em"}}>목록으로</span>
                 </Link>
             );
         }
 
         return (
+            <Link to={`/my`}>
+                <span type="button" data-toggle="button" className="btn btn-outline-success"
+                      style={{ width: "50%", fontSize: "1.2em"}}>내 공구</span>
+            </Link>
+        );
+    }
+
+    renderCheckInButton() {
+        return (
             <div>
                 <Link to={`/login`}>
-                        <span type="button" data-toggle="button" className="btn btn-outline-info"
-                              style={{ width: "50%", fontSize: "1.2em"}}>로그인</span>
+                    <span type="button" data-toggle="button" className="btn btn-outline-info"
+                          style={{ width: "50%", fontSize: "1.2em"}}>로그인</span>
                 </Link>
                 <Link to={`/join`}>
                     <span type="button" data-toggle="button" className="btn btn-outline-success"

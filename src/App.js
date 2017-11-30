@@ -9,6 +9,7 @@ import shortid from "shortid";
 import About from './components/about';
 import ItemDetail from './components/item-detail';
 import ItemList from "./components/item-list";
+import MyList from "./components/my-list";
 import AddItem from "./components/add-item";
 import MemberJoin from "./components/join";
 import Login from "./components/login";
@@ -71,6 +72,7 @@ class App extends Component {
 
                             <Route exact path="/" render={(router) => this.renderItemList(router) } />
                             <Route path="/list" render={(router) => this.renderItemList(router) } />
+                            <Route path="/my" render={(router) => this.renderMyList(router) } />
                             <Route path="/detail/:id" render={(router) => this.renderDetail(router) } />
                             <Route path="/about" component={ About } />
                             <Route path="/add" render={(router) => this.renderAddItem(router) } />
@@ -116,6 +118,16 @@ class App extends Component {
 
         return (
             <ItemList items={ items } isLogin={ isLogin } onDelete={ this.deleteItem } />
+        );
+    }
+
+    renderMyList(router) {
+        const { loginEmail } = this.state;
+        const isLogin = loginEmail ? true :  false;
+        const pathName = router.location.pathname;
+
+        return (
+            <MyList {...this.state} pathName={ pathName } isLogin={ isLogin } onDelete={ this.deleteItem } />
         );
     }
 
