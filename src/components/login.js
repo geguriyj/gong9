@@ -40,12 +40,10 @@ class MemberLogin extends Component {
                     <div className="col" style={{ textAlign: "center"}}>
                         <div style={{ position: "fixed", bottom: 0, width: "93%" }}>
                             <div style={{ padding: "5px 0 5px 0" }}>
-                                <span type="button" data-toggle="button" className="btn btn-outline-info"
-                                    style={{ width: "50%", fontSize: "1.2em"}}
+                                <span type="button" data-toggle="button" className="btn btn-outline-success lg-btn"
                                     onClick={ this.clickMemberLogin }>로그인</span>
                                 <Link to={`/`}>
-                                    <span type="button" data-toggle="button" className="btn btn-outline-danger"
-                                          style={{ width: "50%", fontSize: "1.2em"}}>취소</span>
+                                    <span type="button" data-toggle="button" className="btn btn-outline-success lg-btn">취소</span>
                                 </Link>
                             </div>
                         </div>

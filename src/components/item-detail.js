@@ -42,18 +42,13 @@ class ItemDetail extends Component {
                 </div>
                 <div className="row align-items-end">
                     <div className="col" style={{ textAlign: "center"}}>
-                        <span type="button" data-toggle="button" className="btn btn-outline-danger"
-                              style={{ width: "90px", margin: "2px", fontSize: "1.2em"}}
+                        <span type="button" data-toggle="button" className="btn btn-outline-danger sm-btn"
                               onClick={ this.clickSave }>공구</span>
-                        <span type="button" data-toggle="button" className="btn btn-outline-success"
-                              style={{ width: "90px", margin: "2px", fontSize: "1.2em"}}>초대</span>
-                        <span type="button" data-toggle="button" className="btn btn-outline-info"
-                              style={{ width: "90px", margin: "2px", fontSize: "1.2em"}}
+                        <span type="button" data-toggle="button" className="btn btn-outline-success sm-btn">초대</span>
+                        <span type="button" data-toggle="button" className="btn btn-outline-info sm-btn"
                               onClick={ this.clickFavorite }>찜</span>
                         <Link to="/">
-                            <span type="button" data-toggle="button" className="btn btn-outline-info"
-                                  style={{ width: "90px", margin: "2px", fontSize: "1.2em"}}
-                                  onClick={ this.clickFavorite }>목록으로</span>
+                            <span type="button" data-toggle="button" className="btn btn-outline-warning sm-btn">목록으로</span>
                         </Link>
                     </div>
                 </div>

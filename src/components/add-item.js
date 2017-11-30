@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
+import { buttons } from 'bootstrap-css'
 
 class AddItem extends Component {
     constructor() {
@@ -27,33 +28,36 @@ class AddItem extends Component {
                     </div>
                 </div>
                 <div style={{ borderBottom: "2px solid #7AF5F5"}}></div>
-                <div className="poll" style={{ textAlign: "center", padding: "5px"}}>
-                    *공구이름: <input type="text" id="txt_title" />
-                </div>
-                <div className="poll" style={{ textAlign: "center", padding: "5px"}}>
-                    *상품링크: <input type="text" id="txt_link" />
-                </div>
-                <div className="poll" style={{ textAlign: "center", padding: "5px"}}>
-                    *상품이미지: <input type="text" id="txt_img" />
-                </div>
-                <div className="poll" style={{ textAlign: "center", padding: "5px"}}>
-                    상품태그 ('상품 | 태그' 로 입력): <input type="text" id="txt_tag" />
-                </div>
-                <div className="poll" style={{ textAlign: "center", padding: "5px"}}>
-                    상품옵션: <input type="text" id="txt_option" />
+                <div className="list-group">
+                    <div className="poll">
+                        <span className="input-title">*공구이름: </span>
+                        <input type="text" id="txt_title" className="input-field" />
+                    </div>
+                    <div className="poll">
+                        <span className="input-title">*상품링크: </span>
+                        <input type="text" id="txt_link" className="input-field" />
+                    </div>
+                    <div className="poll">
+                        <span className="input-title">*상품이미지: </span>
+                        <input type="text" id="txt_img" className="input-field" />
+                    </div>
+                    <div className="poll">
+                        <span className="input-title">상품태그: </span>
+                        <input type="text" id="txt_tag" className="input-field" />
+                    </div>
+                    <div className="poll">
+                        <span className="input-title">상품옵션:('상품|태그'로 입력)</span>
+                        <input type="text" id="txt_option" className="input-field" />
+                    </div>
                 </div>
                 <div className="row align-items-end">
                     <div className="col" style={{ textAlign: "center"}}>
                         <div style={{ position: "fixed", bottom: 0, width: "93%" }}>
-                            <div style={{ padding: "5px 0 5px 0" }}>
-                                <span type="button" data-toggle="button" className="btn btn-outline-info"
-                                    style={{ width: "50%", fontSize: "1.2em"}}
-                                    onClick={ this.clickAddItem }>공구등록</span>
-                                <Link to={`/`}>
-                                    <span type="button" data-toggle="button" className="btn btn-outline-danger"
-                                          style={{ width: "50%", fontSize: "1.2em"}}>취소</span>
-                                </Link>
-                            </div>
+                            <span type="button" data-toggle="button" className="btn btn-outline-success lg-btn"
+                                  onClick={ this.clickAddItem }>공구등록</span>
+                            <Link to={`/`}>
+                                <span type="button" data-toggle="button" className="btn btn-outline-danger lg-btn">취소</span>
+                            </Link>
                         </div>
                     </div>
                 </div>

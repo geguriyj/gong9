@@ -15,6 +15,11 @@ body {
   border-bottom: 3px solid #22DDDE;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .nav a {
   text-decoration: none;
   color: inherit;
@@ -100,6 +105,9 @@ body {
 .add-button .icon {
   margin-top: -5px;
 }
+.list-group {
+  padding: 0;
+}
 
 .poll-list {
   height: 100%;
@@ -176,7 +184,6 @@ body {
   height: 20px;
   margin-right: 10px;
   border: 1px #1ec7c7 solid;
-  height: 100%;
   color: #242621;
   margin-bottom: 2px;
 }
@@ -185,16 +192,18 @@ body {
   height: 100%;
 }
 
-.input-field {
-  font-weight: 300;
-  padding: 30px 50px;
-  display: flex;
-  flex-direction: column;
+.input-title {
+  width: 80px;
+  font-size: 13px;
+  color: #1ec7c7;
 }
 
-.input-field .title {
-  font-size: 35px;
-  color: #1ec7c7;
+.input-field {
+  width: 100%;
+  font-weight: 300;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
 }
 
 .input-field .btn {
@@ -219,4 +228,14 @@ body {
 
 .voted {
   background-color: #DEDEDE;
+}
+
+.lg-btn {
+  width: 50%;
+  font-size: 1.2em;
+}
+
+.sm-btn {
+  width: 25%;
+  font-size: 1.2em;
 }

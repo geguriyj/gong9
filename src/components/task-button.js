@@ -24,8 +24,8 @@ export default class extends Component {
             return (
                 <div>
                     <Link to={`/add`}>
-                        <span type="button" data-toggle="button" className="btn btn-outline-success"
-                              style={{ width: "50%", fontSize: "1.2em"}}>공구등록</span>
+                        <span type="button" data-toggle="button"
+                              className="btn btn-outline-danger lg-btn">공구등록</span>
                     </Link>
                     { renderMyPageButton }
                 </div>
@@ -44,16 +44,16 @@ export default class extends Component {
         if (pathName && pathName.indexOf("my") > -1) {
             return (
                 <Link to={`/`}>
-                    <span type="button" data-toggle="button" className="btn btn-outline-success"
-                          style={{ width: "50%", fontSize: "1.2em"}}>목록으로</span>
+                    <span type="button" data-toggle="button"
+                          className="btn btn-outline-success lg-btn">목록으로</span>
                 </Link>
             );
         }
 
         return (
             <Link to={`/my`}>
-                <span type="button" data-toggle="button" className="btn btn-outline-success"
-                      style={{ width: "50%", fontSize: "1.2em"}}>내 공구</span>
+                <span type="button" data-toggle="button"
+                      className="btn btn-outline-success lg-btn">내 공구</span>
             </Link>
         );
     }
@@ -62,12 +62,12 @@ export default class extends Component {
         return (
             <div>
                 <Link to={`/login`}>
-                    <span type="button" data-toggle="button" className="btn btn-outline-info"
-                          style={{ width: "50%", fontSize: "1.2em"}}>로그인</span>
+                    <span type="button" data-toggle="button"
+                          className="btn btn-outline-success lg-btn">로그인</span>
                 </Link>
                 <Link to={`/join`}>
-                    <span type="button" data-toggle="button" className="btn btn-outline-success"
-                          style={{ width: "50%", fontSize: "1.2em"}}>멤버할래.유</span>
+                    <span type="button" data-toggle="button"
+                          className="btn btn-outline-success lg-btn">멤버할래.유</span>
                 </Link>
             </div>
         );

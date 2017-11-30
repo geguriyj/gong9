@@ -27,25 +27,25 @@ class MemberJoin extends Component {
                     </div>
                 </div>
                 <div style={{ borderBottom: "2px solid #7AF5F5"}}></div>
-                <div className="poll" style={{ textAlign: "center", padding: "5px"}}>
-                    *아이디: <input id="txt_id" type="text" />
-                </div>
-                <div className="poll" style={{ textAlign: "center", padding: "5px"}}>
-                    *비밀번호(6자리): <input id="txt_pw" type="text" />
-                </div>
-                <div className="poll" style={{ textAlign: "center", padding: "5px"}}>
+                <div className="list-group">
+                    <div className="poll">
+                        <span className="input-title">*아이디: </span><input id="txt_id" type="text" className="input-field" />
+                    </div>
+                    <div className="poll">
+                        <span className="input-title">*비밀번호(6자리): </span><input id="txt_pw" type="text" className="input-field" />
+                    </div>
+                    <div className="poll">
 
+                    </div>
                 </div>
                 <div className="row align-items-end">
                     <div className="col" style={{ textAlign: "center"}}>
                         <div style={{ position: "fixed", bottom: 0, width: "93%" }}>
                             <div style={{ padding: "5px 0 5px 0" }}>
-                                <span type="button" data-toggle="button" className="btn btn-outline-info"
-                                    style={{ width: "50%", fontSize: "1.2em"}}
+                                <span type="button" data-toggle="button" className="btn btn-outline-success lg-btn"
                                     onClick={ this.clickMemberJoin }>가입</span>
                                 <Link to={`/`}>
-                                    <span type="button" data-toggle="button" className="btn btn-outline-danger"
-                                          style={{ width: "50%", fontSize: "1.2em"}}>취소</span>
+                                    <span type="button" data-toggle="button" className="btn btn-outline-success lg-btn">취소</span>
                                 </Link>
                             </div>
                         </div>
