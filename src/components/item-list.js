@@ -15,7 +15,7 @@ class ItemList extends Component {
 
     render() {
         const itemList = this._getList();
-        const renderTaskButton = this._renderTaskButton();
+        const renderTaskButton = this.renderTaskButton();
 
         return (
             <div>
@@ -44,9 +44,11 @@ class ItemList extends Component {
             count++;
 
             const title = item.title || "공구할래.유?";
-            const type = item.type === "ING" ? "진행중" : "종료";
+            // const type = item.type === "ING" ? "진행중" : "종료";
 
             //TODO 1일 미만으로 남았으면 "마감임박" 으로 표시
+
+            const renderRemoveButton = this.renderDeleteButton(item);
 
             itemList.push(
                 <div className="poll" key={ item.id }>
@@ -56,7 +58,7 @@ class ItemList extends Component {
                         </div>
                         <div>
                             <div>
-                                <span className="poll-info">[{type}] </span>
+                                {/*<span className="poll-info">[{type}] </span>*/}
                                 <span className="question">{title}</span>
                             </div>
                             <div className="poll-answer">
@@ -74,11 +76,7 @@ class ItemList extends Component {
                                   data-toggle="button"
                                   className="btn btn-outline-success list-btn">보기</span>
                         </Link>
-                        <span type="button"
-                              data-toggle="button"
-                              className="btn btn-outline-danger list-btn"
-                              data-key={ item.id }
-                              onClick={ this.clickDelete }>삭제</span>
+                        { renderRemoveButton }
                     </div>
                 </div>
             );
@@ -87,11 +85,27 @@ class ItemList extends Component {
         return itemList;
     }
 
-    _renderTaskButton() {
+    renderTaskButton() {
         const { isLogin } = this.props;
 
         return (
             <TaskButton isLogin={ isLogin } />
+        );
+    }
+
+    renderDeleteButton(item) {
+        const { user } = this.props;
+
+        if (user.email !== item.insert_user) {
+            return null;
+        }
+
+        return (
+            <span type="button"
+                  data-toggle="button"
+                  className="btn btn-outline-danger list-btn"
+                  data-key={ item.id }
+                  onClick={ this.clickDelete }>삭제</span>
         );
     }
 

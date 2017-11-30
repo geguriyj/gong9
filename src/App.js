@@ -154,7 +154,7 @@ class App extends Component {
         }
 
         return (
-            <ItemList items={ items } isLogin={ isLogin } onDelete={ this.deleteItem } />
+            <ItemList user={ user } items={ items } isLogin={ isLogin } onDelete={ this.deleteItem } />
         );
     }
 
