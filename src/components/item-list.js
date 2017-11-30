@@ -42,7 +42,9 @@ class ItemList extends Component {
             count++;
 
             const title = item.title || "공구할래.유?";
-            const type = item.type || "진행중";
+            const type = item.type === "ING" ? "진행중" : "종료";
+
+            //TODO 1일 미만으로 남았으면 "마감임박" 으로 표시
 
             itemList.push(
                 <div className="poll" key={ key }>

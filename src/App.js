@@ -11,6 +11,7 @@ import ItemDetail from './components/item-detail';
 import ItemList from "./components/item-list";
 import AddItem from "./components/add-item";
 import MemberJoin from "./components/join";
+import Login from "./components/login";
 
 class App extends Component {
     constructor() {
@@ -28,7 +29,9 @@ class App extends Component {
         firebase.initializeApp(config);
 
         this.memberJoin = this.memberJoin.bind(this);
+        this.memberLogin = this.memberLogin.bind(this);
         this.login = this.login.bind(this);
+        this.logout = this.logout.bind(this);
         this.addItem = this.addItem.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
         this.saveItem = this.saveItem.bind(this);
@@ -36,7 +39,7 @@ class App extends Component {
 
         this.state = {
             items: [],
-            userId: null
+            loginEmail: null
         };
     }
 
@@ -44,7 +47,7 @@ class App extends Component {
 
         this.reloadDataBase();
 
-        const userId = this.state.userId;
+        const userId = this.state.loginEmail;
 
         if (!userId) {
             firebase.auth().onAuthStateChanged((user) => {
@@ -56,18 +59,14 @@ class App extends Component {
     }
 
     render() {
-
-        const { userId } = this.state;
+        const renderLoginInfo = this.renderLoginInfo();
 
         return (
             <Router>
                 <div className="container">
                     <div className="content col-lg-6 col-lg-offset-3">
                         <div className="main">
-                            <div className="row">
-                                <span>[{ userId }] 님이 로그인 했습니다.</span>
-                                <span type="button" style={{ marginLeft: "15px" }}>로그아웃</span>
-                            </div>
+                            { renderLoginInfo }
                             <div className="row order-selector"></div>
 
                             <Route exact path="/" render={(router) => this.renderItemList(router) } />
@@ -76,7 +75,7 @@ class App extends Component {
                             <Route path="/about" component={ About } />
                             <Route path="/add" render={(router) => this.renderAddItem(router) } />
                             <Route path="/join" render={(router) => this.renderMemberJoin(router) } />
-
+                            <Route path="/login" render={(router) => this.renderLoginPage(router) } />
                         </div>
                     </div>
                 </div>
@@ -85,7 +84,7 @@ class App extends Component {
     }
 
     setLoginId(email) {
-        this.setState({userId: email});
+        this.setState({loginEmail: email});
     }
 
     reloadDataBase() {
@@ -95,9 +94,25 @@ class App extends Component {
         });
     }
 
+    renderLoginInfo() {
+        const { loginEmail } = this.state;
+
+        if (!loginEmail) {
+            return null;
+        }
+
+        return (
+            <div className="row">
+                <span>[{ loginEmail }] 님이 로그인 했습니다.</span>
+                <span type="button" style={{ marginLeft: "15px" }}
+                    onClick={ this.logout }>로그아웃</span>
+            </div>
+        );
+    }
+
     renderItemList() {
-        const { items, userId } = this.state;
-        const isLogin = userId ? true :  false;
+        const { items, loginEmail } = this.state;
+        const isLogin = loginEmail ? true :  false;
 
         return (
             <ItemList items={ items } isLogin={ isLogin } onDelete={ this.deleteItem } />
@@ -113,6 +128,12 @@ class App extends Component {
     renderMemberJoin(router) {
         return (
             <MemberJoin onMmberJoin={ this.memberJoin } router={ router } />
+        );
+    }
+
+    renderLoginPage(router) {
+        return (
+            <Login onMemberLogin={ this.memberLogin } router={ router } />
         );
     }
 
@@ -143,7 +164,9 @@ class App extends Component {
             title: itemData.title,
             link: itemData.link,
             img: itemData.img,
-            date: new Date().getTime()
+            type: "ING",
+            insert_time: new Date().getTime(),
+            insert_user: this.state.loginEmail
         };
         const path = `items/${newKey}`;
 
@@ -176,48 +199,50 @@ class App extends Component {
 
     saveItem(item) {
         const newKey = shortid.generate();
-        const userId = "park";
+        const loginEmail = this.state.loginEmail;
 
         const updates = {
             id: newKey,
             item_id: item.id,
             type: item.type
         };
-        const path = `users/${userId}/purchase/`;
+        const path = `users/${loginEmail}/purchase/`;
 
         return firebase.database().ref(path).set(updates);
     }
 
     addFavoriteItem(item) {
         const newKey = shortid.generate();
-        const userId = "park";
+        const loginEmail = this.state.loginEmail;
 
         const updates = {
             id: newKey,
             item_id: item.id,
             type: item.type
         };
-        const path = `users/${userId}/favorite/`;
+        const path = `users/${loginEmail}/favorite/`;
 
         return firebase.database().ref(path).set(updates);
     }
 
-    memberJoin(id, pw, router) {
-        const email = `${id}@naver.com`;
-        const password = pw;
+    memberJoin(email, password, router) {
 
         firebase.auth()
             .createUserWithEmailAndPassword(email, password)
             .then((res) => {
-                this._completeJoin(id, pw, router);
+                this._completeJoin(email, password, router);
             })
             .catch((error) => {
                 alert(error.message);
             });
     }
 
-    _completeJoin(id, pw, router) {
-        this.login(id, pw, router);
+    memberLogin(email, password, router) {
+        this.login(email, password, router);
+    }
+
+    _completeJoin(email, password, router) {
+        this.login(email, password, router);
     }
 
     login(email, password, router) {

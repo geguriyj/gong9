@@ -27,10 +27,16 @@ export default class extends Component {
         }
 
         return (
-            <Link to={`/join`}>
-                <span type="button" data-toggle="button" className="btn btn-outline-success"
-                      style={{ width: "100%", fontSize: "1.2em"}}>멤버할래.유</span>
-            </Link>
+            <div>
+                <Link to={`/login`}>
+                        <span type="button" data-toggle="button" className="btn btn-outline-info"
+                              style={{ width: "50%", fontSize: "1.2em"}}>로그인</span>
+                </Link>
+                <Link to={`/join`}>
+                    <span type="button" data-toggle="button" className="btn btn-outline-success"
+                          style={{ width: "50%", fontSize: "1.2em"}}>멤버할래.유</span>
+                </Link>
+            </div>
         );
     }
 }
