@@ -37,7 +37,7 @@ class AddItem extends Component {
                     *상품이미지: <input type="text" id="txt_img" />
                 </div>
                 <div className="poll" style={{ textAlign: "center", padding: "5px"}}>
-                    상품태그: <input type="text" id="txt_tag" />
+                    상품태그 ('상품 | 태그' 로 입력): <input type="text" id="txt_tag" />
                 </div>
                 <div className="poll" style={{ textAlign: "center", padding: "5px"}}>
                     상품옵션: <input type="text" id="txt_option" />
