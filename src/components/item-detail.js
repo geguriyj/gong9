@@ -48,7 +48,7 @@ class ItemDetail extends Component {
                         <span type="button" data-toggle="button" className="btn btn-outline-info sm-btn"
                               onClick={ this.clickFavorite }>찜</span>
                         <Link to="/">
-                            <span type="button" data-toggle="button" className="btn btn-outline-warning sm-btn">목록으로</span>
+                            <span type="button" data-toggle="button" className="btn btn-outline-warning sm-btn">목록</span>
                         </Link>
                     </div>
                 </div>
