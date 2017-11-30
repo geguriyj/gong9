@@ -57,15 +57,15 @@ class ItemDetail extends Component {
     }
 
     clickSave() {
-        const { onSave, item } = this.props;
+        const { onSave, item, router } = this.props;
 
-        onSave(item);
+        onSave(item, router);
     }
 
     clickFavorite() {
-        const { onFavorite, item } = this.props;
+        const { onFavorite, item, router } = this.props;
 
-        onFavorite(item);
+        onFavorite(item, router);
     }
 }
 

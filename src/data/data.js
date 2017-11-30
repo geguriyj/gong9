@@ -47,8 +47,8 @@ const itemData = [{
 
  크리스마스 알전구 LED앵두트리 50P 전구색 건전지타입
  크리스마스 전구
- http://shop1.phinf.naver.net/20171121_20/rhdrhd00_1511233723342a6EBp_JPEG/42943924538594483_-1326615668.jpg?type=m450
  http://storefarm.naver.com/lightingsale/products/2314660735?NaPm=ct%3Djamorxiw%7Cci%3Dfbe4ea541e2dac34ee7ab172f10f7475f089040b%7Ctr%3Dsrlt%7Csn%3D168436%7Cic%3D%7Chk%3D72faed4e53423af9c335c4c9ee9f72caa9534273
+ http://shop1.phinf.naver.net/20171121_20/rhdrhd00_1511233723342a6EBp_JPEG/42943924538594483_-1326615668.jpg?type=m450
  */
 
 export default itemData;

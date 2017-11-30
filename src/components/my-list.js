@@ -3,8 +3,6 @@ import React, { Component } from 'react';
 import _ from "lodash";
 import firebase from "firebase";
 
-import Tags from "./tags";
-import StartTime from "./start-time";
 import TaskButton from "./task-button";
 
 class MyList extends Component {
@@ -52,6 +50,24 @@ class MyList extends Component {
         });
     }
 
+    deleteItem(key) {
+        const { user } = this.props;
+
+        debugger;
+
+        const path = `users/${user.uid}/purchase/${key}`;
+
+        firebase.database().ref(path)
+            .remove()
+            .then(() => {
+
+                this.myPurchaseList();
+
+            }).catch((error) => {
+            alert(error.message);
+        });
+    }
+
     render() {
         const itemList = this._getList();
         const renderTaskButton = this._renderTaskButton();
@@ -78,7 +94,7 @@ class MyList extends Component {
         let itemList = [];
         let count = 0;
 
-        _.forEach(items, (item, key) => {
+        _.forEach(items, (item) => {
 
             count++;
 
@@ -88,7 +104,7 @@ class MyList extends Component {
             //TODO 1일 미만으로 남았으면 "마감임박" 으로 표시
 
             itemList.push(
-                <div className="poll" key={ key }>
+                <div className="poll" key={ item.id }>
                     <div className="poll-left">
                         <div className="poll-index">
                             #{count}
@@ -98,19 +114,13 @@ class MyList extends Component {
                                 <span className="poll-info">[{type}] </span>
                                 <span className="question">{title}</span>
                             </div>
-                            <div className="poll-answer">
-                                <div className="answer-options">
-                                    <Tags tags={ item.tags } />
-                                </div>
-                            </div>
-                            <StartTime item={ item } />
                         </div>
                     </div>
                     <div className="poll-right">
                         <span type="button"
                               data-toggle="button"
                               className="btn btn-outline-danger list-btn"
-                              data-key={ key }
+                              data-key={ item.id }
                               onClick={ this.clickDelete }>삭제</span>
                     </div>
                 </div>
@@ -127,8 +137,6 @@ class MyList extends Component {
     }
 
     clickDelete(e) {
-        const { onDelete } = this.props;
-
         const target = e.target;
         const key = target.getAttribute("data-key");
 
@@ -136,7 +144,7 @@ class MyList extends Component {
             return;
         }
 
-        onDelete(key);
+        this.deleteItem(key);
     }
 }
 

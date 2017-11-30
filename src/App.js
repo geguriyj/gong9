@@ -204,7 +204,7 @@ class App extends Component {
         }
 
         return (
-            <ItemDetail item={ item }
+            <ItemDetail item={ item } router={ router }
                 onSave={ this.saveItem }
                 onFavorite={ this.addFavoriteItem } />
         );
@@ -252,7 +252,7 @@ class App extends Component {
             });
     }
 
-    saveItem(item) {
+    saveItem(item, router) {
         const newKey = shortid.generate();
 
         const updates = {
@@ -260,9 +260,15 @@ class App extends Component {
             item_id: item.id,
             type: item.type
         };
-        const path = `users/${this.state.user.uid}/purchase/${newKey}`;
+        const path = `users/${this.state.user.uid}/purchase/${item.id}`;
 
-        return firebase.database().ref(path).set(updates);
+        return firebase.database().ref(path)
+            .set(updates)
+            .then(() => {
+                if (router) {
+                    router.history.push("/my");
+                }
+            });
     }
 
     addFavoriteItem(item) {
@@ -273,7 +279,7 @@ class App extends Component {
             item_id: item.id,
             type: item.type
         };
-        const path = `users/${this.state.user.uid}/favorite/${newKey}`;
+        const path = `users/${this.state.user.uid}/favorite/${item.id}`;
 
         return firebase.database().ref(path).set(updates);
     }

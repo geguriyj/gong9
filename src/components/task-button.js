@@ -65,7 +65,7 @@ export default class extends Component {
                 </Link>
                 <Link to={`/join`}>
                     <span type="button" data-toggle="button"
-                          className="btn btn-outline-info lg-btn">멤버할래.유</span>
+                          className="btn btn-outline-info lg-btn">가입할래.유</span>
                 </Link>
             </div>
         );

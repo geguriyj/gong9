@@ -49,7 +49,7 @@ class ItemList extends Component {
             //TODO 1일 미만으로 남았으면 "마감임박" 으로 표시
 
             itemList.push(
-                <div className="poll" key={ key }>
+                <div className="poll" key={ item.id }>
                     <div className="poll-left">
                         <div className="poll-index">
                             #{count}
@@ -77,7 +77,7 @@ class ItemList extends Component {
                         <span type="button"
                               data-toggle="button"
                               className="btn btn-outline-danger list-btn"
-                              data-key={ key }
+                              data-key={ item.id }
                               onClick={ this.clickDelete }>삭제</span>
                     </div>
                 </div>
