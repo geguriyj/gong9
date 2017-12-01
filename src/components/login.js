@@ -29,7 +29,7 @@ class MemberLogin extends Component {
                     </div>
                     <div className="bar-line"></div>
                     <div className="poll" style={{ padding: "10px 10px 10px 20px" }}>
-                        <span className="input-title">*아이디: </span>
+                        <span className="input-title">*아이디(이메일): </span>
                         <input id="txt_id" type="text" className="input-field" style={{ width: "300px" }}/>
                     </div>
                     <div className="poll" style={{ padding: "10px 10px 10px 20px" }}>

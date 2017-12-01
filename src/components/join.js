@@ -29,12 +29,15 @@ class MemberJoin extends Component {
                     </div>
                     <div className="bar-line"></div>
                     <div className="poll" style={{ padding: "10px 10px 10px 20px" }}>
-                        <span className="input-title">*아이디: </span>
+                        <span className="input-title">*아이디(이메일): </span>
                         <input id="txt_id" type="text" className="input-field" style={{ width: "300px" }}/>
                     </div>
                     <div className="poll" style={{ padding: "10px 10px 10px 20px" }}>
                         <span className="input-title">*비밀번호(6자리): </span>
                         <input id="txt_pw" type="text" className="input-field" style={{ width: "300px" }}/>
+                    </div>
+                    <div className="poll" style={{ padding: "10px 10px 10px 20px" }}>
+                        <span className="input-title">테스트 기간입니다. 비밀번호는 `aa1234` 로 해주세요. </span>
                     </div>
                 </div>
                 <div className="task-menu">
