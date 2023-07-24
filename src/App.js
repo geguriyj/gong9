@@ -52,8 +52,8 @@ class App extends Component {
     componentDidMount() {
 
         this.reloadDataBase();
-        // this.myPurchaseList();
-        // this.myFavoriteList();
+        this.myPurchaseList();
+        this.myFavoriteList();
 
         const userId = this.state.user.email;
 
